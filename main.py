@@ -654,6 +654,7 @@ class MainApplication(ttk.Frame):
 if __name__ == "__main__":
     root = tk.Tk()
     root.title('CyclistVsCar')
+    root.resizable(width=False, height=False)
     MainApplication(root).grid(row=0, column=0)
     root.mainloop()
 
