@@ -69,7 +69,7 @@ class Options(ttk.Labelframe):
                                         ' (pence/km)')
             self.parent.comparisons.kmPerPoundLabel.set(
                                             'km travelled per £1 ' + fuelType
-                                            + ' km/£')
+                                            + ' (km/£)')
             self.parent.comparisons.totalKmLabel.set('km travelled on ' + 
                                                 fuelQuantity + 
                                                 self.fuelQuantityUnit.get()

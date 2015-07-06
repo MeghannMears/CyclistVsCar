@@ -3,15 +3,19 @@ import lists
 def cyclistEnergyUse(parent, cyclistWeight, bikeWeight, velocity):
 # Calculate bike kJ/km and km/kJ
 # Invoked by cyclist data frame when any field changed
+    # Converted from metric input to imperial for use with Irons formula
     cyclistWeight = cyclistWeight.get()
     bikeWeight = bikeWeight.get()
     velocity = velocity.get()
     # Check fields are not empty
     if (cyclistWeight != '' and bikeWeight != '' and velocity != ''):
-        # Calculate energy use
-        energyUse = (0.03816*float(velocity)*
-            (float(cyclistWeight)+float(bikeWeight)) + 
-            0.06264*(float(velocity)**3))
+        # Convert metric input to imperial for Irons formula
+        cyclistWeight = float(cyclistWeight) * 2.2046 # kg -> lb
+        bikeWeight = float(bikeWeight) * 2.2046 # kg -> lb
+        velocity = float(velocity) * 0.6214 # km/hr -> mi/hr
+        # Calculate energy use 
+        energyUse = ((0.0053 * velocity * (cyclistWeight + bikeWeight) + 
+            0.0083 * velocity**3) * 7.2)
         parent.comparisons.cyclistEnergyUse.set(round(energyUse))
         parent.comparisons.cyclistDistance.set(round((1/energyUse)*1000, 2))
     else:
