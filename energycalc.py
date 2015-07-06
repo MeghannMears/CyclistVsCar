@@ -13,9 +13,13 @@ def cyclistEnergyUse(parent, cyclistWeight, bikeWeight, velocity):
         cyclistWeight = float(cyclistWeight) * 2.2046 # kg -> lb
         bikeWeight = float(bikeWeight) * 2.2046 # kg -> lb
         velocity = float(velocity) * 0.6214 # km/hr -> mi/hr
-        # Calculate energy use 
+        # Calculate energy use (output units = kcal/hr)
         energyUse = ((0.0053 * velocity * (cyclistWeight + bikeWeight) + 
             0.0083 * velocity**3) * 7.2)
+        # Convert imperial to metric
+        energyUse = energyUse * 4.1868 # kcal/hr -> kJ/hr
+        # Divide through velocity to get kJ/km
+        energyUse = energyUse / velocity # kJ/hr -> kJ/km
         parent.comparisons.cyclistEnergyUse.set(round(energyUse))
         parent.comparisons.cyclistDistance.set(round((1/energyUse)*1000, 2))
     else:
